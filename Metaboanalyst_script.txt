@@ -1,0 +1,36 @@
+library(MetaboAnalystR)
+tmp.vec <- c("Acetoacetic acid", "Beta-Alanine", "Creatine", "Dimethylglycine", "Fumaric acid", "Glycine", "Homocysteine", "L-Cysteine", "L-Isolucine", "L-Phenylalanine", "L-Serine", "L-Threonine", "L-Tyrosine", "L-Valine", "Phenylpyruvic acid", "Propionic acid", "Pyruvic acid", "Sarcosine")
+mSet<-InitDataObjects("conc", "pathora", FALSE, default.dpi = 300)
+mSet<-Setup.MapData(mSet, tmp.vec);
+mSet<-CrossReferencing(mSet, "name");
+mSet<-CreateMappingResultTable(mSet);
+
+# Check which compounds didn't get a match
+which(mSet$name.map$match.state == 0)
+mSet$name.map$query.vec[which(mSet$name.map$match.state == 0)]
+
+# Fix it
+mSet<-PerformDetailMatch(mSet, "<Trouble compound>");
+mSet<-GetCandidateList(mSet);
+
+unmatched_indices <- which(mSet$name.map$match.state == 0)
+unmatched_queries <- mSet$name.map$query.vec[unmatched_indices]
+
+# Step 1: Get user input
+candidates <- mSet$name.map$hits.candidate.list[[i]]
+print(paste("Candidates for", query, ":"))
+print(candidates)
+choice <- as.integer(readline(prompt = "Enter the candidate number you want to use: "))
+
+# Enter the candidate number
+
+# Step 2: Process the input (this is separate code)
+if (!is.na(choice) && choice > 0 && choice <= length(candidates)) {
+    chosen_candidate <- candidates[choice]
+    mSet <- SetCandidate(mSet, query, chosen_candidate)
+} else {
+    cat("Invalid choice, skipping...\n")
+}
+mSet$name.map$hits.candidate.list <- NULL
+
+
