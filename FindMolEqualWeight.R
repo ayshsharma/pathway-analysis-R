@@ -2,6 +2,9 @@
 cache_key <- function(mass, tol) paste0(format(mass, digits = 12), "_", tol)
 
 library(KEGGREST)
+library(MetaboAnalystR)
+library(dplyr)
+library(ggplot2)
 
 FindMolEqualWeight <- function(query_weight, tolerance = 1000){
   key <- cache_key(query_weight, tolerance)
@@ -50,13 +53,28 @@ getAdditionalMol <- function(query_kegg, query_weight, tolerance = 1000, max_ret
 
 
 
+# Create cache
+.mass_cache <- new.env(parent = emptyenv())
+
+getMolActualWeight <- function(keggid) {
+  # Return cached value if available
+  if (exists(keggid, envir = .mass_cache, inherits = FALSE)) {
+    return(get(keggid, envir = .mass_cache))
+  }
+  # Otherwise query KEGG
+  raw_mass <- keggGet(keggid)[[1]]$EXACT_MASS
+  mass <- as.numeric(raw_mass)   
+  # Store in cache
+  assign(keggid, mass, envir = .mass_cache)
+  
+  mass
+}
 
 
 
 # Creating a dataframe with all combinations of tolerances and percentage of pathway compounds
 fracs <- list(0.01, 0.05, 0.1, 0.2, 0.5, 0.75, 1)
 tolerances <- list(1, 3, 5, 10, 30, 60, 100)
-
 
 
 
@@ -135,7 +153,7 @@ for (pathway in names(all_pathway_lists)) {
 }
 
 saveRDS(testing_main_db, file="Main_Testing.Rda")
-
+# testing_main_db <- readRDS("Main_Testing.rds")
 
 # Get a graph of number of molecules against T for a set of 50 random query molecules
 
@@ -154,9 +172,22 @@ for (pathway in names(testing_main_db)) {
   }
 }
 
-library(MetaboAnalystR)
+testing_main_db <- lapply(testing_main_db, function(x) {
+  names(x) <- paste0("frac_", names(x))
+  x
+})
 
-sampled_pathways = c("hsa00250", "hsa00480", "hsa00330", "hsa00430", "hsa00470", "hsa00650", "hsa00130", "hsa00410", "hsa00010", "hsa00860", "hsa00600", "hsa00120") # "hsa00785" "hsa00350" "hsa00730" "hsa00240" "hsa00220" "hsa00260", "hsa00670", "hsa00400", "hsa00290", "hsa00360" "hsa00270" "hsa00770" "hsa00630" "hsa00280", "hsa00020", "hsa00640", "hsa00620"
+
+testing_main_db <- lapply(testing_main_db, function(x) {
+  lapply(x, function(y) {
+    names(y) <- paste0("tol_", names(y))
+    y
+  })
+})
+
+# library(MetaboAnalystR)
+
+sampled_pathways = c("hsa00785", "hsa00250", "hsa00480", "hsa00330", "hsa00430", "hsa00470", "hsa00650", "hsa00130", "hsa00410", "hsa00010", "hsa00860", "hsa00600", "hsa00120", "hsa00350", "hsa00730", "hsa00240", "hsa00220", "hsa00260", "hsa00670", "hsa00400", "hsa00290", "hsa00360", "hsa00270", "hsa00770", "hsa00630", "hsa00280", "hsa00020", "hsa00640", "hsa00620") # 
 sampled_tol = as.character(c(1, 3, 5, 10, 30, 60, 100))
 sampled_fracs = as.character(c(1, 0.75, 0.5, 0.2, 0.1, 0.05, 0.01)) # 1, 0.75, 0.5, 0.2, 0.1, 0.05, 0.01
 
@@ -213,7 +244,39 @@ for (pathway in sampled_pathways) {
   }
 }
 
+
+all_pathway_results <- lapply(all_pathway_results, function(x) {
+  names(x) <- paste0("frac_", names(x))
+  x
+})
+
+
+all_pathway_results <- lapply(all_pathway_results, function(x) {
+  lapply(x, function(y) {
+    names(y) <- paste0("tol_", names(y))
+    y
+  })
+})
+
+
+all_pathway_results <- lapply(all_pathway_results, function(x) {
+  
+  # reorder second level (frac_) in decreasing order
+  frac_vals <- as.numeric(sub("frac_", "", names(x)))
+  x <- x[order(frac_vals, decreasing = TRUE)]
+  
+  # reorder third level (tol_) within each frac in increasing order
+  x <- lapply(x, function(y) {
+    tol_vals <- as.numeric(sub("tol_", "", names(y)))
+    y[order(tol_vals)]
+  })
+  
+  x
+})
+
+
 save(all_pathway_results, file="Pathway analysis with parameters.Rda")
+# load("Pathway analysis with parameters.Rda")
 
 # Select 50 random compounds
 # Run FindMolEqualWeight() for each with very high value of tolerance
@@ -434,7 +497,7 @@ unique_kegg
 
 
 
-library(dplyr)
+# library(dplyr)
 
 one_row_per_kegg <- all_kegg %>%
   group_by(kegg_id) %>%
@@ -473,7 +536,7 @@ hist(
 
 
 
-library(ggplot2)
+# library(ggplot2)
 
 ggplot(one_row_per_kegg, aes(x = mol_mass)) +
   geom_histogram(bins = 500, fill = "skyblue", color = "black", na.rm = TRUE) +
@@ -486,7 +549,7 @@ ggplot(one_row_per_kegg, aes(x = mol_mass)) +
 
 unique_kegg_200_300 <- unique_kegg[unique_kegg$mol_mass>520 & unique_kegg$mol_mass<550, ]
 
-choose(30, 2)
+# choose(30, 2)
 
 
 
@@ -538,7 +601,7 @@ all_ev <- do.call(rbind, lapply(names(all_pathway_results), function(pathway) {
 }))
 
 
-library(dplyr)
+# library(dplyr)
 
 summary_df <- all_ev %>%
   group_by(num_candidates) %>%
@@ -550,9 +613,19 @@ summary_df <- all_ev %>%
     q90    = quantile(expected_mols, 0.90, na.rm = TRUE)
   )
 
+summary_frac_df <- all_ev %>%
+  group_by(num_candidates) %>%
+  summarise(
+    median = median(frac_mols, na.rm = TRUE),
+    mean   = mean(frac_mols, na.rm = TRUE),
+    sd     = sd(frac_mols, na.rm = TRUE),
+    q10    = quantile(frac_mols, 0.10, na.rm = TRUE),
+    q90    = quantile(frac_mols, 0.90, na.rm = TRUE)
+  )
 
 
-library(ggplot2)
+
+# library(ggplot2)
 
 ggplot(summary_df, aes(x = num_candidates)) +
   geom_ribbon(aes(ymin = mean - sd, ymax = mean + sd),
@@ -577,25 +650,285 @@ ggplot(summary_df, aes(x = num_candidates)) +
 
 
 # Look at metspace, take 20 datasets
-num_compounds <- c(629, 138, 2593, 645, 3639, 141, 1378, 1278, 11, 609)
+num_compounds <- c(629, 138, 3639, 141, 2187, 1176, 2796, 
+                   3020, 58, 111, 87, 202, 234, 733, 1425, 
+                   649, 241, 154, 3397, 3064, 2319, 85)
 
 metaspace_examples <- data.frame(
   num_compounds = num_compounds,
   expected_mols = as.vector(all_pathway_results[["hsa00770"]][["frac_1"]][["tol_100"]]$expected_values[num_compounds, "expected_mols"]),
   expected_fracs = as.vector(all_pathway_results[["hsa00770"]][["frac_1"]][["tol_100"]]$expected_values[num_compounds, "frac_mols"]),
   dataset_id = c("2026-05-29_21h54m50s", 
-                 "2026-05-13_14h12m22s", 
-                 "2026-04-28_09h20m56s", 
-                 "2026-04-24_09h36m39s", 
+                 "2026-05-13_14h12m22s",
                  "2025-12-15_21h10m33s", 
-                 "2026-04-10_01h17m48s", 
-                 "2026-04-08_09h12m38s", 
-                 "2026-04-08_09h10m11s", 
-                 "2026-04-07_00h56m38s",
-                 "2026-02-25_14h16m03s")
+                 "2026-04-10_01h17m48s",
+                 "2025-12-15_21h11m26s",
+                 "2025-12-15_21h12m21s",
+                 "2025-10-02_20h50m16s",
+                 "2025-10-02_20h50m54s",
+                 "2025-04-29_07h01m44s",
+                 "2025-04-13_23h58m36s",
+                 "2025-04-10_15h11m23s",
+                 "2023-12-08_11h30m26s",
+                 "2023-12-08_11h28m27s",
+                 "2023-11-28_14h02m10s",
+                 "2023-11-27_02h14m07s",
+                 "2023-11-17_14h13m29s",
+                 "2022-05-06_22h55m06s",
+                 "2022-04-11_21h04m05s",
+                 "2023-08-15_21h27m22s",
+                 "2023-08-15_21h26m44s",
+                 "2022-04-05_01h59m18s",
+                 "2022-04-11_21h59m42s"),
+  organism_type = c("mmu",
+                    "mmu",
+                    "hsa",
+                    "mmu",
+                    "hsa",
+                    "hsa",
+                    "mmu",
+                    "mmu",
+                    "bta",
+                    "rno",
+                    "rno",
+                    "mmu",
+                    "mmu",
+                    "mmu",
+                    "bta",
+                    "rno",
+                    "hsa",
+                    "hsa",
+                    "mmu",
+                    "mmu",
+                    "hsa",
+                    "hsa")
   # link = c("")
 )
 metaspace_examples
+
+
+
+
+
+# Plot histogram of number of molecules in metaspace datasets
+# 
+
+# Using a python script to collect metaspace datasets
+metaspace_examples_script <- read.csv(file = "C:/Users/infer/Desktop/R-Work/pathway-analysis-R/metaspace_fticr_kegg_annotations_summary.csv")
+hist(metaspace_examples_script$annotations_fdr_lte_0.5, breaks = 45)
+
+
+
+# Adding organism KEGG ids to the dataframe for calling MetaboAnalystR more easily
+
+
+metaspace_examples_script$kegg_organism <- sapply(
+  metaspace_examples_script$organism_query,
+  function(organism) {
+    switch(
+      organism,
+      "Homo sapiens" = "hsa",
+      "Homo sapiens (human)" = "hsa",
+      "Homo sapiens (KEGG)" = "hsa",
+      
+      "Mus musculus" = "mmu",
+      "Mus musculus (mouse)" = "mmu",
+      "Mus musculus (house mouse) (KEGG)" = "mmu",
+      "Mouse" = "mmu",
+      
+      "Rattus norvegicus (rat)" = "rno",
+      
+      "Bovine" = "bta",
+      
+      "Glycine max (soybean)" = "gmx",
+      
+      NA_character_
+    )
+  }
+)
+
+
+hist(metaspace_examples_script$annotations_fdr_lte_0.5, breaks = 35)
+
+
+# Combining both and plotting
+
+# library(ggplot2)
+
+summary_frac_df_2500 <- summary_frac_df %>%
+  dplyr::filter(num_candidates <= 2500)
+
+df <- data.frame(
+  molecule_counts = metaspace_examples_script$annotations_fdr_lte_0.5
+)
+
+binwidth <- diff(range(df$molecule_counts)) / 30
+
+hist_max <- max(table(cut(df$molecule_counts, 30)))
+curve_max <- max(summary_frac_df_2500$median)
+
+scale_factor <- hist_max / curve_max
+
+
+scale_y_continuous(
+  limits = c(-hist_max, hist_max),  # symmetric space
+  labels = abs,
+  sec.axis = sec_axis(~ . / scale_factor)
+)
+
+ggplot() +
+  geom_histogram(
+    data = df,
+    aes(x = molecule_counts, y = -..count..),
+    bins = 30,
+    fill = "grey70",
+    color = "black"
+  ) +
+  geom_density(
+    data = df,
+    aes(x = molecule_counts, y = -..density.. * n * binwidth),
+    adjust = 0.25,
+    color = "blue",
+    size = 1.2
+  ) +
+  geom_ribbon(
+    data = summary_frac_df_2500, 
+    aes(
+      x = num_candidates,
+      ymin = (mean - sd) * scale_factor,
+      ymax = (mean + sd) * scale_factor
+    ),
+    fill = "grey", alpha = 0.4
+  ) +
+  geom_line(
+    data = summary_frac_df_2500,
+    aes(x = num_candidates, y = median * scale_factor),
+    color = "red",
+    size = 1.2
+  ) +
+  scale_y_continuous(
+    name = "Frequency (datasets)",
+    labels = abs,
+    sec.axis = sec_axis(
+      ~ . / scale_factor,
+      name = "Expected molecules"
+    )
+  ) +
+  labs(
+    x = "Number of molecules / candidates",
+    title = "Observed Distribution vs Expected Trend"
+  ) +
+  coord_cartesian(xlim = c(0, 2500)) +
+  theme_minimal()
+
+
+# Adding compounds from the datasets
+
+# Folder containing the individual METASPACE annotation CSVs
+annotation_folder <- "C:/Users/infer/Desktop/R-Work/pathway-analysis-R/metaspace_kegg_annotation_csvs"
+
+# Helper function to extract KEGG compound IDs from one annotation CSV
+extract_kegg_ids_from_file <- function(file_path, unique_only = TRUE, remove_offsample = FALSE) {
+  
+  if (is.na(file_path) || file_path == "" || !file.exists(file_path)) {
+    return(character(0))
+  }
+  
+  ann <- read.csv(file_path, stringsAsFactors = FALSE)
+  
+  # Optional: remove off-sample annotations
+  if (remove_offsample && "offSample" %in% names(ann)) {
+    ann <- ann[ann$offSample == FALSE | ann$offSample == "False", ]
+  }
+  
+  if (!"moleculeIds" %in% names(ann)) {
+    return(character(0))
+  }
+  
+  # Extract KEGG IDs like C00123 from the moleculeIds column
+  ids_nested <- regmatches(
+    ann$moleculeIds,
+    gregexpr("C\\d{5}", ann$moleculeIds)
+  )
+  
+  ids <- unlist(ids_nested)
+  
+  if (unique_only) {
+    ids <- sort(unique(ids))
+  }
+  
+  ids
+}
+
+# Make paths absolute if annotation_csv_path contains relative paths
+metaspace_examples_script$annotation_csv_path_full <- ifelse(
+  file.exists(metaspace_examples_script$annotation_csv_path),
+  metaspace_examples_script$annotation_csv_path,
+  file.path(annotation_folder, basename(metaspace_examples_script$annotation_csv_path))
+)
+
+# Add compounds as a list-column, matching each row
+metaspace_examples_script$kegg_compounds <- I(
+  lapply(
+    metaspace_examples_script$annotation_csv_path_full,
+    extract_kegg_ids_from_file,
+    unique_only = TRUE,
+    remove_offsample = FALSE
+  )
+)
+
+# Check result
+head(metaspace_examples_script$kegg_compounds)
+
+
+# Creating a column excluding off sample compounds
+
+metaspace_examples_script$kegg_compounds_on_sample <- I(
+  lapply(
+    metaspace_examples_script$annotation_csv_path_full,
+    extract_kegg_ids_from_file,
+    unique_only = TRUE,
+    remove_offsample = TRUE
+  )
+)
+
+
+metaspace_examples_script$n_kegg_compounds <- lengths(
+  metaspace_examples_script$kegg_compounds
+)
+
+
+
+
+
+
+# If you want to check all the compounds in 
+#
+# compounds <- metaspace_examples_script$kegg_compounds[
+#   metaspace_examples_script$dataset_id == "2022-04-11_21h59m42s"
+# ][[1]]
+# 
+# compounds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

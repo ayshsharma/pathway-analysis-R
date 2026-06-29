@@ -1,0 +1,65 @@
+dataset_id,dataset_name,organism_query,database_id,database_name,database_version,total_annotations,annotations_fdr_lte_0.5,annotation_csv_path
+2025-12-15_21h10m33s,placenta_ito_APEBA,Homo sapiens (human),374,KEGG,v1,328,328,metaspace_kegg_annotation_csvs\2025-12-15_21h10m33s__placenta_ito_APEBA__KEGG__v1.csv
+2025-12-15_21h11m26s,placenta_pen#1_4APEBA,Homo sapiens (human),374,KEGG,v1,174,174,metaspace_kegg_annotation_csvs\2025-12-15_21h11m26s__placenta_pen_1_4APEBA__KEGG__v1.csv
+2025-12-15_21h12m21s,placenta_pen#2,Homo sapiens (human),374,KEGG,v1,168,168,metaspace_kegg_annotation_csvs\2025-12-15_21h12m21s__placenta_pen_2__KEGG__v1.csv
+2022-05-06_22h55m06s,05042022_torti_c12_c13_v2_erastin,Homo sapiens (human),374,KEGG,v1,241,241,metaspace_kegg_annotation_csvs\2022-05-06_22h55m06s__05042022_torti_c12_c13_v2_erastin__KEGG__v1.csv
+2022-04-11_21h04m05s,20220407_torti_erastinvscntrl_run2a14c,Homo sapiens (human),374,KEGG,v1,154,154,metaspace_kegg_annotation_csvs\2022-04-11_21h04m05s__20220407_torti_erastinvscntrl_run2a14c__KEGG__v1.csv
+2022-04-05_01h59m18s,20220331_tort_cntrl_erastin_12dhb_001_a13_t_cntl_2,Homo sapiens (human),374,KEGG,v1,2319,2319,metaspace_kegg_annotation_csvs\2022-04-05_01h59m18s__20220331_tort_cntrl_erastin_12dhb_001_a13_t_cntl_2__KEGG__v1.csv
+2022-04-11_21h59m42s,20220407_torti_erastinvscntrl_run2a14t,Homo sapiens (human),374,KEGG,v1,85,85,metaspace_kegg_annotation_csvs\2022-04-11_21h59m42s__20220407_torti_erastinvscntrl_run2a14t__KEGG__v1.csv
+2021-11-10_08h09m47s,print20_pos,Homo sapiens (human),374,KEGG,v1,40,40,metaspace_kegg_annotation_csvs\2021-11-10_08h09m47s__print20_pos__KEGG__v1.csv
+2021-11-10_07h40m35s,print19_neg,Homo sapiens (human),374,KEGG,v1,7,7,metaspace_kegg_annotation_csvs\2021-11-10_07h40m35s__print19_neg__KEGG__v1.csv
+2021-11-10_07h02m55s,print11_pos,Homo sapiens (human),374,KEGG,v1,45,45,metaspace_kegg_annotation_csvs\2021-11-10_07h02m55s__print11_pos__KEGG__v1.csv
+2021-11-10_04h48m47s,pos_print19_rms_peak1104,Homo sapiens (human),374,KEGG,v1,42,42,metaspace_kegg_annotation_csvs\2021-11-10_04h48m47s__pos_print19_rms_peak1104__KEGG__v1.csv
+2026-05-29_21h54m50s,V11L12-109-B1.from_smamsi,Mus musculus (mouse),374,KEGG,v1,194,115,metaspace_kegg_annotation_csvs\2026-05-29_21h54m50s__V11L12-109-B1.from_smamsi__KEGG__v1.csv
+2026-05-13_14h12m22s,V11L12-038-B1.from_smamsi,Mus musculus (mouse),374,KEGG,v1,172,138,metaspace_kegg_annotation_csvs\2026-05-13_14h12m22s__V11L12-038-B1.from_smamsi__KEGG__v1.csv
+2026-04-10_01h17m48s,V11L12-038-D1.from_smamsi,Mus musculus (mouse),374,KEGG,v1,141,141,metaspace_kegg_annotation_csvs\2026-04-10_01h17m48s__V11L12-038-D1.from_smamsi__KEGG__v1.csv
+2025-04-10_23h29m14s,re-annotate RB_a2s2 2018,Mus musculus (mouse),374,KEGG,v1,9302,51,metaspace_kegg_annotation_csvs\2025-04-10_23h29m14s__re-annotate_RB_a2s2_2018__KEGG__v1.csv
+2023-12-08_11h30m26s,ito_9aa_mouse3,Mus musculus (mouse),374,KEGG,v1,202,202,metaspace_kegg_annotation_csvs\2023-12-08_11h30m26s__ito_9aa_mouse3__KEGG__v1.csv
+2023-12-08_11h28m27s,ito_9aa_mouse1,Mus musculus (mouse),374,KEGG,v1,202,202,metaspace_kegg_annotation_csvs\2023-12-08_11h28m27s__ito_9aa_mouse1__KEGG__v1.csv
+2023-12-08_11h32m26s,ito_9aa_mouse4,Mus musculus (mouse),374,KEGG,v1,203,203,metaspace_kegg_annotation_csvs\2023-12-08_11h32m26s__ito_9aa_mouse4__KEGG__v1.csv
+2023-12-08_11h33m27s,ito_dhb_mouse1,Mus musculus (mouse),374,KEGG,v1,107,107,metaspace_kegg_annotation_csvs\2023-12-08_11h33m27s__ito_dhb_mouse1__KEGG__v1.csv
+2023-12-08_11h36m46s,ito_fmp10_mpd1,Mus musculus (mouse),374,KEGG,v1,42,42,metaspace_kegg_annotation_csvs\2023-12-08_11h36m46s__ito_fmp10_mpd1__KEGG__v1.csv
+2023-12-08_11h35m33s,ito_dhb_mouse4,Mus musculus (mouse),374,KEGG,v1,107,107,metaspace_kegg_annotation_csvs\2023-12-08_11h35m33s__ito_dhb_mouse4__KEGG__v1.csv
+2023-12-08_11h34m42s,ito_dhb_mouse3,Mus musculus (mouse),374,KEGG,v1,105,105,metaspace_kegg_annotation_csvs\2023-12-08_11h34m42s__ito_dhb_mouse3__KEGG__v1.csv
+2023-12-08_11h37m32s,ito_fmp10_mpd3,Mus musculus (mouse),374,KEGG,v1,40,40,metaspace_kegg_annotation_csvs\2023-12-08_11h37m32s__ito_fmp10_mpd3__KEGG__v1.csv
+2023-12-08_11h38m41s,ito_fmp10_mpd4,Mus musculus (mouse),374,KEGG,v1,41,41,metaspace_kegg_annotation_csvs\2023-12-08_11h38m41s__ito_fmp10_mpd4__KEGG__v1.csv
+2023-12-08_11h43m23s,to2_dhb,Mus musculus (mouse),374,KEGG,v1,139,139,metaspace_kegg_annotation_csvs\2023-12-08_11h43m23s__to2_dhb__KEGG__v1.csv
+2023-12-08_11h41m09s,to2_9aa_c2,Mus musculus (mouse),374,KEGG,v1,76,76,metaspace_kegg_annotation_csvs\2023-12-08_11h41m09s__to2_9aa_c2__KEGG__v1.csv
+2023-12-08_11h44m13s,to2_fmp10,Mus musculus (mouse),374,KEGG,v1,85,85,metaspace_kegg_annotation_csvs\2023-12-08_11h44m13s__to2_fmp10__KEGG__v1.csv
+2023-12-08_11h40m17s,to2_9aa_c1,Mus musculus (mouse),374,KEGG,v1,76,76,metaspace_kegg_annotation_csvs\2023-12-08_11h40m17s__to2_9aa_c1__KEGG__v1.csv
+2023-12-08_11h46m12s,to2_norharpos,Mus musculus (mouse),374,KEGG,v1,48,48,metaspace_kegg_annotation_csvs\2023-12-08_11h46m12s__to2_norharpos__KEGG__v1.csv
+2023-12-08_11h45m18s,to2_norharneg,Mus musculus (mouse),374,KEGG,v1,44,44,metaspace_kegg_annotation_csvs\2023-12-08_11h45m18s__to2_norharneg__KEGG__v1.csv
+2023-11-28_14h02m10s,231123_sc_fticr,Mus musculus (mouse),374,KEGG,v1,733,733,metaspace_kegg_annotation_csvs\2023-11-28_14h02m10s__231123_sc_fticr__KEGG__v1.csv
+2025-04-13_23h58m36s,re-annot: 20210814_jl_ratbrain_posmode,Rattus norvegicus (rat),374,KEGG,v1,111,111,metaspace_kegg_annotation_csvs\2025-04-13_23h58m36s__re-annot_20210814_jl_ratbrain_posmode__KEGG__v1.csv
+2025-04-10_15h11m23s,"Rat_brain_pos_ITO Bowman A, ..., and Smith D 2020",Rattus norvegicus (rat),374,KEGG,v1,87,87,metaspace_kegg_annotation_csvs\2025-04-10_15h11m23s__Rat_brain_pos_ITO_Bowman_A_..._and_Smith_D_2020__KEGG__v1.csv
+2023-11-17_14h13m29s,20231116-CON-dhb-p-xzw-root mean square,Rattus norvegicus (rat),374,KEGG,v1,649,649,metaspace_kegg_annotation_csvs\2023-11-17_14h13m29s__20231116-CON-dhb-p-xzw-root_mean_square__KEGG__v1.csv
+2023-11-27_00h59m00s,4hrsilglucose_2nd_20201109_trim,Bovine,374,KEGG,v1,1334,1276,metaspace_kegg_annotation_csvs\2023-11-27_00h59m00s__4hrsilglucose_2nd_20201109_trim__KEGG__v1.csv
+2023-11-27_01h02m35s,30minsilglucose_2nd_20201116_trim,Bovine,374,KEGG,v1,1439,1398,metaspace_kegg_annotation_csvs\2023-11-27_01h02m35s__30minsilglucose_2nd_20201116_trim__KEGG__v1.csv
+2023-11-27_00h54m03s,2hrsilglucose_2nd_20201109_trim,Bovine,374,KEGG,v1,1392,1357,metaspace_kegg_annotation_csvs\2023-11-27_00h54m03s__2hrsilglucose_2nd_20201109_trim__KEGG__v1.csv
+2023-11-27_00h52m08s,1hrsilglucose_2nd_20201109_trim,Bovine,374,KEGG,v1,1201,1156,metaspace_kegg_annotation_csvs\2023-11-27_00h52m08s__1hrsilglucose_2nd_20201109_trim__KEGG__v1.csv
+2023-11-27_00h33m12s,15minsilglucose_2nd_20201116_trim,Bovine,374,KEGG,v1,1303,1269,metaspace_kegg_annotation_csvs\2023-11-27_00h33m12s__15minsilglucose_2nd_20201116_trim__KEGG__v1.csv
+2023-11-27_00h21m53s,ff_trim_01_08042021,Bovine,374,KEGG,v1,1329,1325,metaspace_kegg_annotation_csvs\2023-11-27_00h21m53s__ff_trim_01_08042021__KEGG__v1.csv
+2023-11-27_00h20m10s,ff_trim_02_08042021,Bovine,374,KEGG,v1,1364,1357,metaspace_kegg_annotation_csvs\2023-11-27_00h20m10s__ff_trim_02_08042021__KEGG__v1.csv
+2023-11-27_00h18m33s,ff_trim_03_08042021,Bovine,374,KEGG,v1,1281,1276,metaspace_kegg_annotation_csvs\2023-11-27_00h18m33s__ff_trim_03_08042021__KEGG__v1.csv
+2025-10-02_20h50m16s,3585-1-4apeba_fticr_rms,Mouse,374,KEGG,v1,896,896,metaspace_kegg_annotation_csvs\2025-10-02_20h50m16s__3585-1-4apeba_fticr_rms__KEGG__v1.csv
+2025-10-02_20h50m54s,3586-2-4apeba_fticr_rms,Mouse,374,KEGG,v1,906,906,metaspace_kegg_annotation_csvs\2025-10-02_20h50m54s__3586-2-4apeba_fticr_rms__KEGG__v1.csv
+2023-08-15_21h27m22s,#2-iri,Mouse,374,KEGG,v1,383,383,metaspace_kegg_annotation_csvs\2023-08-15_21h27m22s__2-iri__KEGG__v1.csv
+2023-08-15_21h26m44s,#4-control,Mouse,374,KEGG,v1,315,315,metaspace_kegg_annotation_csvs\2023-08-15_21h26m44s__4-control__KEGG__v1.csv
+2022-09-29_14h34m16s,20220929_lipid_X_pde_86-05-01_chca-root mean square,Mouse,374,KEGG,v1,0,0,metaspace_kegg_annotation_csvs\2022-09-29_14h34m16s__20220929_lipid_X_pde_86-05-01_chca-root_mean_square__KEGG__v1.csv
+2022-07-22_12h40m31s,sqlite2imzML converter test,Mouse,374,KEGG,v1,15,15,metaspace_kegg_annotation_csvs\2022-07-22_12h40m31s__sqlite2imzML_converter_test__KEGG__v1.csv
+2022-04-08_08h23m22s,07-04-2022_pde_dhb-baseline_wt_t-test_v1,Mouse,374,KEGG,v1,5,5,metaspace_kegg_annotation_csvs\2022-04-08_08h23m22s__07-04-2022_pde_dhb-baseline_wt_t-test_v1__KEGG__v1.csv
+2022-04-08_08h23m36s,07-04-2022_pde_dhb-baseline_ko_t-test_v1,Mouse,374,KEGG,v1,4,4,metaspace_kegg_annotation_csvs\2022-04-08_08h23m36s__07-04-2022_pde_dhb-baseline_ko_t-test_v1__KEGG__v1.csv
+2023-06-22_22h47m49s,20230620_nodule2_chca_dma_pos_25um,Glycine max (soybean),374,KEGG,v1,583,583,metaspace_kegg_annotation_csvs\2023-06-22_22h47m49s__20230620_nodule2_chca_dma_pos_25um__KEGG__v1.csv
+2023-06-22_22h47m25s,20230620_nodule1_chca_dma_pos_25um,Glycine max (soybean),374,KEGG,v1,722,722,metaspace_kegg_annotation_csvs\2023-06-22_22h47m25s__20230620_nodule1_chca_dma_pos_25um__KEGG__v1.csv
+2023-06-22_22h46m35s,nodule_chca_dma_pos_50um_same,Glycine max (soybean),374,KEGG,v1,531,531,metaspace_kegg_annotation_csvs\2023-06-22_22h46m35s__nodule_chca_dma_pos_50um_same__KEGG__v1.csv
+2023-06-22_22h45m54s,nodule_chca_dma_neg_50um_same,Glycine max (soybean),374,KEGG,v1,421,421,metaspace_kegg_annotation_csvs\2023-06-22_22h45m54s__nodule_chca_dma_neg_50um_same__KEGG__v1.csv
+2023-06-22_22h15m51s,20230622_nodule_1_nedc_neg,Glycine max (soybean),374,KEGG,v1,1139,1139,metaspace_kegg_annotation_csvs\2023-06-22_22h15m51s__20230622_nodule_1_nedc_neg__KEGG__v1.csv
+2023-06-22_22h25m56s,20230622_nodule_chca_dma_neg,Glycine max (soybean),374,KEGG,v1,730,730,metaspace_kegg_annotation_csvs\2023-06-22_22h25m56s__20230622_nodule_chca_dma_neg__KEGG__v1.csv
+2023-06-22_22h18m17s,20230622_nodule_2_nedc_neg,Glycine max (soybean),374,KEGG,v1,1287,1287,metaspace_kegg_annotation_csvs\2023-06-22_22h18m17s__20230622_nodule_2_nedc_neg__KEGG__v1.csv
+2023-06-22_22h22m08s,20230622_nodule_3_dhb_pos,Glycine max (soybean),374,KEGG,v1,605,605,metaspace_kegg_annotation_csvs\2023-06-22_22h22m08s__20230622_nodule_3_dhb_pos__KEGG__v1.csv
+2023-06-22_22h14m33s,20230622_nodule_1_dhb_pos,Glycine max (soybean),374,KEGG,v1,520,520,metaspace_kegg_annotation_csvs\2023-06-22_22h14m33s__20230622_nodule_1_dhb_pos__KEGG__v1.csv
+2023-06-22_22h16m50s,20230622_nodule_2_dhb_pos,Glycine max (soybean),374,KEGG,v1,668,668,metaspace_kegg_annotation_csvs\2023-06-22_22h16m50s__20230622_nodule_2_dhb_pos__KEGG__v1.csv
+2023-06-16_21h46m13s,soybean_nodule_2_chca_dma_pos,Glycine max (soybean),374,KEGG,v1,1229,1229,metaspace_kegg_annotation_csvs\2023-06-16_21h46m13s__soybean_nodule_2_chca_dma_pos__KEGG__v1.csv
+2023-06-16_21h46m38s,soybean_nodule_dhb_pos,Glycine max (soybean),374,KEGG,v1,580,580,metaspace_kegg_annotation_csvs\2023-06-16_21h46m38s__soybean_nodule_dhb_pos__KEGG__v1.csv
+2023-06-16_21h45m45s,soybean_nodule_1_chca_dma_pos,Glycine max (soybean),374,KEGG,v1,705,705,metaspace_kegg_annotation_csvs\2023-06-16_21h45m45s__soybean_nodule_1_chca_dma_pos__KEGG__v1.csv
+2023-06-16_21h43m45s,soybean_nodule_chca_dma_neg,Glycine max (soybean),374,KEGG,v1,811,811,metaspace_kegg_annotation_csvs\2023-06-16_21h43m45s__soybean_nodule_chca_dma_neg__KEGG__v1.csv
